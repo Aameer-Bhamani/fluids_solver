@@ -15,7 +15,7 @@ double solve(std::vector<double>& u, double dx, const SolverConfig& cfg) {
     double t = 0.0;
 
     while (t < cfg.t_end) {
-        const double dt = std::min(dt_cfl, cfg.t_end - t);  // don't overshoot t_end
+        const double dt = std::min(dt_cfl, cfg.t_end - t);  // ensuring overshoot does not occur
         u = forward_euler_step(u, cfg.a, dt, dx);
         t += dt;
     }

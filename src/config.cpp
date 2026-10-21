@@ -10,7 +10,7 @@ namespace advection {
 
 namespace {
 
-// Read tbl[section][key]. Returns `def` if absent, throws if present but the wrong type.
+// Read tbl[section][key]. Handles exceptions in case file is missing or key does not exist
 template <typename T>
 T get_or(const toml::table& tbl, std::string_view section, std::string_view key, T def) {
     const auto node = tbl[section][key];
@@ -20,6 +20,7 @@ T get_or(const toml::table& tbl, std::string_view section, std::string_view key,
                              std::string(key) + " has the wrong type");
 }
 
+// validate settings are sound
 void validate(const CaseConfig& c) {
     if (c.grid.n_cells <= 0)
         throw std::runtime_error("config: [grid] n_cells must be positive");
@@ -35,6 +36,7 @@ void validate(const CaseConfig& c) {
 
 }  // namespace
 
+// extract case setup
 CaseConfig load_config(const std::string& path) {
     toml::table tbl;
     try {
