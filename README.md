@@ -1,7 +1,7 @@
-# advection1d
+# Fluids Solver
 
-1D linear advection solved with a cell-centred finite volume method
-(first-order upwind in space, forward Euler in time, periodic boundaries).
+Currently has functionality to solve 1D linear advection with a cell-centred
+finite volume (first-order upwind in space, forward Euler in time, periodic boundaries).
 
 ## Layout
 
