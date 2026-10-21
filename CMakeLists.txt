@@ -17,6 +17,7 @@ add_library(advection
   src/time_integrator.cpp
   src/solver.cpp
   src/io.cpp
+  src/config.cpp
 )
 target_include_directories(advection PUBLIC include)
 target_compile_options(advection PRIVATE -Wall -Wextra -Wpedantic)
