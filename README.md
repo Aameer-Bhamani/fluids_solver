@@ -7,7 +7,6 @@
 
     include/advection/   public headers
     src/                 implementations + main.cpp
-    scripts/             post-processing (put post_process.py here)
 
 ## Build & run
 
