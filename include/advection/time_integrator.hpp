@@ -1,11 +1,41 @@
 #pragma once
 
+#include <functional>
 #include <vector>
+#include <memory>
+#include <string>
+
 
 namespace advection {
+using RHSFunction = std::function<std::vector<double>(const std::vector<double>&)>;
 
-/// One forward Euler step: u^{n+1} = u^n - dt * a du/dx
-std::vector<double> forward_euler_step(const std::vector<double>& u,
-                                       double a, double dt, double dx);
+class TimeIntegrator {
+    public:
+        virtual ~TimeIntegrator() = default;
+        virtual std::vector<double> step(const std::vector<double>& u, 
+                                        double dt,
+                                        const RHSFunction& rhs) const = 0;
+
+};
+
+class ForwardEuler : public TimeIntegrator{
+    public:
+        std::vector<double> step(const std::vector<double>& u, double dt,
+                                const RHSFunction& rhs) const override;
+};
+
+class Heun : public TimeIntegrator{
+    public:
+    std::vector<double> step(const std::vector<double>& u, double dt,
+                             const RHSFunction& rhs) const override;
+};
+
+// class RK4 : public TimeIntegrator{
+//     public:
+//     std::vector<double> step(const std::vector<double>& u, double dt,
+//                              const RHSFunction& rhs) const override;
+// };
+
+std::unique_ptr<TimeIntegrator> make_integrator(const std::string& name);
 
 }  // namespace advection
