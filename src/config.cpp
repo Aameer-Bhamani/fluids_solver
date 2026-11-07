@@ -55,6 +55,7 @@ CaseConfig load_config(const std::string& path) {
     c.solver.a     = get_or(tbl, "solver", "a",     c.solver.a);
     c.solver.cfl   = get_or(tbl, "solver", "cfl",   c.solver.cfl);
     c.solver.t_end = get_or(tbl, "solver", "t_end", c.solver.t_end);
+    c.solver.integrator = get_or(tbl, "solver", "integrator", c.solver.integrator);
 
     c.output.outputfile   = get_or(tbl, "output", "csv_file",    c.output.outputfile);
 

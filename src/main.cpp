@@ -7,6 +7,7 @@
 #include "advection/io.hpp"
 #include "advection/problem.hpp"
 #include "advection/solver.hpp"
+#include "advection/time_integrator.hpp"
 
 int main(int argc, char** argv) {
     try {
@@ -28,8 +29,10 @@ int main(int argc, char** argv) {
         const auto u_initial = advection::initial_condition(grid);
         auto u = u_initial;
 
+        auto time_integrator =  advection::make_integrator(cfg.solver.integrator);
+
         // solve system
-        const double t = advection::solve(u, grid.dx, cfg.solver);
+        const double t = advection::solve(u, grid.dx, cfg.solver, *time_integrator);
 
         // generate analytic solution
         const auto u_exact = advection::analytic_solution(grid, cfg.solver.a, t);
