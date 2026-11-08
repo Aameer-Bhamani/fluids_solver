@@ -11,7 +11,7 @@ on a periodic domain, using a cell-centred finite volume method. The test case i
 - Config-driven: grid, solver and output settings come from a TOML file
 - Spatial schemes: first-order upwind, second-order central, MUSCL
 - Slope limiters for MUSCL: minmod, van Leer
-- Time integrators: forward Euler, Heun (RK2), classical RK4
+- Time integrators: forward Euler, Heun (RK2)
 - Periodic boundaries handled with ghost cells, so schemes of any stencil width plug in
 - Last time step is clipped so the solution lands exactly on `t_end`
 - CSV output and a Python script for plotting
@@ -46,7 +46,7 @@ Example `config/case.toml` (the values here are illustrative, see the file in th
     # domain and number of cells
 
     [solver]
-    integrator = "rk4"        # forward_euler | heun | rk4
+    integrator = "hen"        # forward_euler | heun 
     scheme     = "muscl"      # upwind | central | muscl
     limiter    = "van_leer"   # minmod | van_leer (only used by muscl)
 
