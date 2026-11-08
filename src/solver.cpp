@@ -5,18 +5,19 @@
 #include <stdexcept>
 
 #include "advection/time_integrator.hpp"
+#include "advection/spatial_scheme.hpp"
 #include "advection/flux.hpp"
 
 namespace advection {
 
-double solve(std::vector<double>& u, double dx, const SolverConfig& cfg, const TimeIntegrator& method) {
+double solve(std::vector<double>& u, double dx, const SolverConfig& cfg, const TimeIntegrator& method, const SpatialScheme& scheme) {
     if (cfg.a == 0.0) throw std::invalid_argument("solve: advection speed must be non-zero");
 
     const double dt_cfl = cfg.cfl * dx / std::abs(cfg.a);
     double t = 0.0;
 
-    auto rhs = [a = cfg.a, dx](const std::vector<double>& state) {
-        std::vector<double> result = upwind_divergence(state, a, dx);
+    auto rhs = [a = cfg.a, dx, &scheme](const std::vector<double>& state) {
+        std::vector<double> result = flux_divergence(state, a, dx, scheme);
         for (size_t i = 0; i< state.size();++i){
             result[i] = -result[i];
         }
