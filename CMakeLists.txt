@@ -18,6 +18,7 @@ add_library(advection
   src/solver.cpp
   src/io.cpp
   src/config.cpp
+  src/spatial_scheme.cpp
 )
 target_include_directories(advection PUBLIC include)
 target_compile_options(advection PRIVATE -Wall -Wextra -Wpedantic)
