@@ -9,7 +9,8 @@
 namespace advection {
 
 struct SolverConfig {
-    double a      = 1.0;   ///< advection speed
+    double a_x      = 1.0;   ///< advection speed
+    double a_y      = 0.0;   ///< advection speed
     double cfl    = 0.5;   ///< CFL number
     double t_end  = 0.4;   ///< final time
     std::string integrator = "forward_euler"; ///default time integrator

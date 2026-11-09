@@ -11,12 +11,12 @@
 namespace advection {
 
 double solve(std::vector<double>& u, double dx, const SolverConfig& cfg, const TimeIntegrator& method, const SpatialScheme& scheme) {
-    if (cfg.a == 0.0) throw std::invalid_argument("solve: advection speed must be non-zero");
+    if (cfg.a_x == 0.0) throw std::invalid_argument("solve: advection speed must be non-zero");
 
-    const double dt_cfl = cfg.cfl * dx / std::abs(cfg.a);
+    const double dt_cfl = cfg.cfl * dx / std::abs(cfg.a_x);
     double t = 0.0;
 
-    auto rhs = [a = cfg.a, dx, &scheme](const std::vector<double>& state) {
+    auto rhs = [a = cfg.a_x, dx, &scheme](const std::vector<double>& state) {
         std::vector<double> result = flux_divergence(state, a, dx, scheme);
         for (size_t i = 0; i< state.size();++i){
             result[i] = -result[i];
