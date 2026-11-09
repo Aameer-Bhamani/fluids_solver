@@ -1,4 +1,5 @@
 #include "advection/io.hpp"
+#include "advection/grid2d.hpp"
 
 #include <fstream>
 #include <iomanip>

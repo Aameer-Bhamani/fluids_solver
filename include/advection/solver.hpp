@@ -4,7 +4,7 @@
 #include <string>
 
 #include "advection/time_integrator.hpp"
-#include "advection/spatial_scheme.hpp"
+#include "advection/spatial_operator.hpp"
 
 namespace advection {
 
@@ -20,6 +20,6 @@ struct SolverConfig {
 
 /// Advance `u` in place to t_end. Returns the final time reached.
 /// The last step is clipped so the solution lands exactly on t_end.
-double solve(std::vector<double>& u, double dx, const SolverConfig& cfg, const TimeIntegrator& method, const SpatialScheme& scheme);
+double solve(std::vector<double>& u, const SolverConfig& cfg, const TimeIntegrator& method, const SpatialOperator& op);
 
 }  // namespace advection
