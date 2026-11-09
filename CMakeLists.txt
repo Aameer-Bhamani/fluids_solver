@@ -19,6 +19,8 @@ add_library(advection
   src/io.cpp
   src/config.cpp
   src/spatial_scheme.cpp
+  src/grid2d.cpp
+  src/spatial_operator.cpp
 )
 target_include_directories(advection PUBLIC include)
 target_compile_options(advection PRIVATE -Wall -Wextra -Wpedantic)
